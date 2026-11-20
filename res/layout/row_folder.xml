@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_row"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:minHeight="56dp"
+    android:orientation="horizontal"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp">
+    <CheckBox android:id="@+id/row_check" android:layout_width="wrap_content" android:layout_height="wrap_content" android:focusable="false" />
+    <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_marginStart="8dp" android:importantForAccessibility="no" android:src="@drawable/ic_folder" android:tint="@color/accent" />
+    <TextView android:id="@+id/row_name" style="@style/Text.Subtitle" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:ellipsize="middle" android:fontFamily="sans-serif" android:singleLine="true" />
+    <ImageView android:layout_width="24dp" android:layout_height="24dp" android:importantForAccessibility="no" android:src="@drawable/ic_chevron" android:tint="@color/on_surface_variant" />
+</LinearLayout>

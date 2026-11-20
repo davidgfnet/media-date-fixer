@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Launcher icon foreground, 108 dp adaptive-icon grid.
+
+  Made from two unmodified glyphs of Phosphor Icons v2.1.1 (npm @phosphor-icons/core,
+  https://phosphoricons.com), MIT License, Copyright (c) 2023 Phosphor Icons. See NOTICE.
+    * assets/duotone/image-duotone.svg      (256x256 grid)
+    * assets/fill/calendar-check-fill.svg   (256x256 grid)
+  Path data is copied verbatim; only placement and colours were changed:
+    * image:    scaled 52/256, moved to (20,18)
+    * calendar: scaled 30/256, moved to (51,50), painted amber, over the image's lower right corner
+    * the pair is then re-centred on (54,54) and scaled by 0.9 to fit the 66 dp safe circle,
+      which gives the scale/translate values of the groups below
+    * the clip path cuts the image away around the calendar (a 4.5 dp radius notch) so the two
+      stay separated without depending on the background colour.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <group android:name="image">
+        <clip-path android:pathData="M0,0H108V52.02H60.21A4.5,4.5 0 0,0 55.71,56.52V108H0Z" />
+        <group android:scaleX="0.182813" android:scaleY="0.182813"
+            android:translateX="26.01" android:translateY="24.12">
+            <!-- duotone layer (20 % opacity in Phosphor), painted solid pale blue -->
+            <path android:fillColor="#C9D6FF" android:pathData="M224,56V178.06l-39.72-39.72a8,8,0,0,0-11.31,0L147.31,164,97.66,114.34a8,8,0,0,0-11.32,0L32,168.69V56a8,8,0,0,1,8-8H216A8,8,0,0,1,224,56Z" />
+            <path android:fillColor="#FFFFFF" android:pathData="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z" />
+        </group>
+    </group>
+    <group android:name="calendar" android:scaleX="0.105469" android:scaleY="0.105469"
+        android:translateX="53.91" android:translateY="52.92">
+        <path android:fillColor="#FFB74D" android:pathData="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM169.66,133.66l-48,48a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L116,164.69l42.34-42.35a8,8,0,0,1,11.32,11.32ZM48,80V48H72v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80Z" />
+    </group>
+</vector>

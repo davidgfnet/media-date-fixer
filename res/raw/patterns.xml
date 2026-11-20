@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Built-in filename patterns, tried in this order (most specific first). Read at run time by
+  FilenamePattern.loadPresets(); `make test` checks every <example>.
+
+  <pattern>
+    id       stable key, stored in saved settings ("whatsapp" is also used by WhatsApp mode)
+    label    shown in Advanced mode, followed by the first example's name
+    utc      "true" if the name is in UTC rather than local time
+    default  "true" to enable it in a fresh Advanced configuration
+    <regex>  Java regex with named groups: year month day [hour minute second millis] [seq], or epoch.
+             seq = seconds added to the date; epoch = seconds or milliseconds since 1970.
+    <example name="..." date="..."/>  expected result: local time (2023-01-15T14:30:22), an instant
+             with Z, or "none" when the name must not match.
+  </pattern>
+-->
+<patterns>
+
+    <!-- IMG-20230115-WA0001.jpg, VID-..., AUD-..., PTT-... (voice notes), STK-... (stickers), DOC-....
+         Date only; the WAnnnn counter is added as seconds so files keep their order. -->
+    <pattern id="whatsapp" label="WhatsApp" default="true">
+        <regex><![CDATA[^(?:IMG|VID|AUD|PTT|STK|DOC)-(?<year>\d{4})(?<month>\d{2})(?<day>\d{2})-WA(?<seq>\d{4,})]]></regex>
+        <example name="IMG-20230115-WA0012.jpg" date="2023-01-15T00:00:12" />
+        <example name="VID-20230702-WA0003.mp4" date="2023-07-02T00:00:03" />
+        <example name="PTT-20230702-WA0000.opus" date="2023-07-02T00:00:00" />
+        <example name="IMG_20230115_143022.jpg" date="none" />
+        <example name="IMG-20231345-WA0001.jpg" date="none" />
+    </pattern>
+
+    <!-- PXL_20230115_143022123.jpg: Pixel camera names are in UTC, not local time. -->
+    <pattern id="pixel" label="Pixel camera, UTC" utc="true" default="true">
+        <regex><![CDATA[^PXL_(?<year>\d{4})(?<month>\d{2})(?<day>\d{2})_(?<hour>\d{2})(?<minute>\d{2})(?<second>\d{2})(?<millis>\d{3})?]]></regex>
+        <example name="PXL_20230115_143022123.jpg" date="2023-01-15T14:30:22.123Z" />
+        <example name="PXL_20230115_143022.MP.jpg" date="2023-01-15T14:30:22Z" />
+    </pattern>
+
+    <!-- Screenshot_20230115-143022.png, Screenshot_2023-01-15-14-30-22-123_com.app.jpg, Screen_Recording_.... -->
+    <pattern id="screenshot" label="Screenshots" default="true">
+        <regex><![CDATA[^(?:Screenshot|Screen_Recording|screen-recording)[_ -](?<year>\d{4})-?(?<month>\d{2})-?(?<day>\d{2})[-_ ](?<hour>\d{2})[-_.]?(?<minute>\d{2})[-_.]?(?<second>\d{2})]]></regex>
+        <example name="Screenshot_20230115-143022.png" date="2023-01-15T14:30:22" />
+        <example name="Screenshot_2023-01-15-14-30-22-123_com.example.jpg" date="2023-01-15T14:30:22" />
+        <example name="Screenshot_20230115_143022_Chrome.jpg" date="2023-01-15T14:30:22" />
+    </pattern>
+
+    <!-- IMG_20230115_143022.jpg, VID_20230115_143022.mp4, 20230115_143022.jpg, 2023-01-15 14.30.22.jpg,
+         signal-2023-01-15-143022.jpg. Matches anywhere in the name, so it goes after the specific ones. -->
+    <pattern id="camera" label="Camera" default="true">
+        <regex><![CDATA[(?<!\d)(?<year>(?:19|20)\d{2})[-_.]?(?<month>[01]\d)[-_.]?(?<day>[0-3]\d)[ _T-]?(?<hour>[0-2]\d)[-_.:]?(?<minute>[0-5]\d)[-_.:]?(?<second>[0-5]\d)(?<millis>\d{3})?(?!\d)]]></regex>
+        <example name="IMG_20230115_143022.jpg" date="2023-01-15T14:30:22" />
+        <example name="VID_20230115_143022.mp4" date="2023-01-15T14:30:22" />
+        <example name="20230115_143022.jpg" date="2023-01-15T14:30:22" />
+        <example name="2023-01-15 14.30.22.jpg" date="2023-01-15T14:30:22" />
+        <example name="IMG_20230115_143022123.jpg" date="2023-01-15T14:30:22.123" />
+        <example name="IMG-20230115-WA0001.jpg" date="none" />
+        <example name="IMG_20231315_143022.jpg" date="none" />
+        <example name="holiday.jpg" date="none" />
+    </pattern>
+
+    <!-- 1673793022.jpg or photo_1673793022123.jpg: seconds or milliseconds since 1970 (always UTC). -->
+    <pattern id="epoch" label="Unix timestamp" utc="true">
+        <regex><![CDATA[(?<!\d)(?<epoch>1\d{9}(?:\d{3})?)(?!\d)]]></regex>
+        <example name="1673793022.jpg" date="2023-01-15T14:30:22Z" />
+        <example name="photo_1673793022123.jpg" date="2023-01-15T14:30:22.123Z" />
+        <example name="16737930221.jpg" date="none" />
+    </pattern>
+</patterns>
