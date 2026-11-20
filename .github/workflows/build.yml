@@ -1,7 +1,11 @@
 name: build
+
 on:
   push:
-    branches: ["master"]
+    branches:
+      - 'master'
+    tags:
+      - '*'
 
 jobs:
   apk:
